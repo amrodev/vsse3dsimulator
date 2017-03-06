@@ -1,0 +1,451 @@
+<?php
+ob_start();
+session_start();
+
+if (isset($_POST['start_counter'])) {
+	$_SESSION['Round'] = 1;
+	header("Location: ../counter.php");
+	$_SESSION['RoundCompleate_team1']        = false;
+	$_SESSION['RoundCompleate_team2']        = false;
+	$_SESSION['RoundCompleate_team3']        = false;
+	$_SESSION['RoundCompleate_team4']        = false;
+	$_SESSION['RoundQualityCompleate_team1'] = false;
+	$_SESSION['RoundQualityCompleate_team2'] = false;
+	$_SESSION['RoundQualityCompleate_team3'] = false;
+	$_SESSION['RoundQualityCompleate_team4'] = false;
+
+	//Round
+	$_SESSION['Team1BonusScoreRound']         = 0;
+	$_SESSION['Team1QuantityScoreRound']      = 0;
+	$_SESSION['Team1QuantityScoreTotalRound'] = 0;
+	$_SESSION['Team1QualityScoreRound']       = 0;
+
+	$_SESSION['Team2BonusScoreRound']         = 0;
+	$_SESSION['Team2QuantityScoreRound']      = 0;
+	$_SESSION['Team2QuantityScoreTotalRound'] = 0;
+	$_SESSION['Team2QualityScoreRound']       = 0;
+
+	$_SESSION['Team3BonusScoreRound']         = 0;
+	$_SESSION['Team3QuantityScoreRound']      = 0;
+	$_SESSION['Team3QuantityScoreTotalRound'] = 0;
+	$_SESSION['Team3QualityScoreRound']       = 0;
+
+	$_SESSION['Team4BonusScoreRound']         = 0;
+	$_SESSION['Team4QuantityScoreRound']      = 0;
+	$_SESSION['Team4QuantityScoreTotalRound'] = 0;
+	$_SESSION['Team4QualityScoreRound']       = 0;
+
+	//TOTAL
+	$_SESSION['Team1BonusTotal']    = 0;
+	$_SESSION['Team1QuantityTotal'] = 0;
+	$_SESSION['Team1Total']         = 0;
+	$_SESSION['Team1QualityTotal']  = 0;
+
+	$_SESSION['Team2BonusTotal']    = 0;
+	$_SESSION['Team2QuantityTotal'] = 0;
+	$_SESSION['Team2Total']         = 0;
+	$_SESSION['Team2QualityTotal']  = 0;
+
+	$_SESSION['Team3BonusTotal']    = 0;
+	$_SESSION['Team3QuantityTotal'] = 0;
+	$_SESSION['Team3Total']         = 0;
+	$_SESSION['Team3QualityTotal']  = 0;
+
+	$_SESSION['Team4BonusTotal']    = 0;
+	$_SESSION['Team4QuantityTotal'] = 0;
+	$_SESSION['Team4Total']         = 0;
+	$_SESSION['Team4QualityTotal']  = 0;
+
+}
+
+if (isset($_POST['next_round'])) {
+	$_SESSION['Round']++;
+	$_SESSION['RoundCompleate_team1']        = false;
+	$_SESSION['RoundCompleate_team2']        = false;
+	$_SESSION['RoundCompleate_team3']        = false;
+	$_SESSION['RoundCompleate_team4']        = false;
+	$_SESSION['RoundQualityCompleate_team1'] = false;
+	$_SESSION['RoundQualityCompleate_team2'] = false;
+	$_SESSION['RoundQualityCompleate_team3'] = false;
+	$_SESSION['RoundQualityCompleate_team4'] = false;
+
+	//Round
+	$_SESSION['Team1BonusScoreRound']         = 0;
+	$_SESSION['Team1QuantityScoreRound']      = 0;
+	$_SESSION['Team1QuantityScoreTotalRound'] = 0;
+	$_SESSION['Team1QualityScoreRound']       = 0;
+
+	$_SESSION['Team2BonusScoreRound']         = 0;
+	$_SESSION['Team2QuantityScoreRound']      = 0;
+	$_SESSION['Team2QuantityScoreTotalRound'] = 0;
+	$_SESSION['Team2QualityScoreRound']       = 0;
+
+	$_SESSION['Team3BonusScoreRound']         = 0;
+	$_SESSION['Team3QuantityScoreRound']      = 0;
+	$_SESSION['Team3QuantityScoreTotalRound'] = 0;
+	$_SESSION['Team3QualityScoreRound']       = 0;
+
+	$_SESSION['Team4BonusScoreRound']         = 0;
+	$_SESSION['Team4QuantityScoreRound']      = 0;
+	$_SESSION['Team4QuantityScoreTotalRound'] = 0;
+	$_SESSION['Team4QualityScoreRound']       = 0;
+
+	//TOTAL
+	$_SESSION['Team1BonusTotal']    = 0;
+	$_SESSION['Team1QuantityTotal'] = 0;
+	$_SESSION['Team1Total']         = 0;
+	$_SESSION['Team1QualityTotal']  = 0;
+
+	$_SESSION['Team2BonusTotal']    = 0;
+	$_SESSION['Team2QuantityTotal'] = 0;
+	$_SESSION['Team2Total']         = 0;
+	$_SESSION['Team2QualityTotal']  = 0;
+
+	$_SESSION['Team3BonusTotal']    = 0;
+	$_SESSION['Team3QuantityTotal'] = 0;
+	$_SESSION['Team3Total']         = 0;
+	$_SESSION['Team3QualityTotal']  = 0;
+
+	$_SESSION['Team4BonusTotal']    = 0;
+	$_SESSION['Team4QuantityTotal'] = 0;
+	$_SESSION['Team4Total']         = 0;
+	$_SESSION['Team4QualityTotal']  = 0;
+	header("Location: ../counter.php");
+}
+
+if (isset($_POST['saveRoundTeam1'])) {
+	require_once '../lib/settings.php';
+	$_sett  = new Setting();
+	$params = $_sett->get_by_where1('type', 'taget_time');
+	//var_dump($params);
+
+	$taget_time           = $params[0][2];
+	$params               = $_sett->get_by_where1('type', 'taget_hold');
+	$taget_hold           = $params[0][2];
+	$params               = $_sett->get_by_where1('type', 'n_rounds');
+	$n_rounds             = $params[0][2];
+	$ath                  = $_POST['ath'].'<br>';
+	$hold                 = $_POST['hold'].'<br>';
+	$bonus                = $_POST['number'].'<br>';
+	$quantity_score       = 0;
+	$quantity_score_bonus = 0;
+	$team                 = "team1";
+
+	//time
+	if ($ath < $taget_time+1) {
+		$quantity_score += 100;
+	} elseif ($ath < (1.2*$taget_time)+1) {
+		$quantity_score += 50;
+	} elseif ($ath < (1.4*$taget_time)+1) {
+		$quantity_score += 25;
+	} elseif ($ath > (1.4*$taget_time)+1) {
+		$quantity_score += 0;
+	}
+
+	//hold
+	if ($hold < $taget_hold+1) {
+		$quantity_score += 100;
+	} elseif ($hold < (1.2*$taget_hold)+1) {
+		$quantity_score += 50;
+	} elseif ($hold < (1.4*$taget_hold)+1) {
+		$quantity_score += 25;
+	} elseif ($hold > (1.4*$taget_hold)+1) {
+		$quantity_score += 0;
+	}
+
+	$quantity_score_bonus                     = $quantity_score+$bonus;
+	$_SESSION['Team1BonusScoreRound']         = $bonus;
+	$_SESSION['Team1QuantityScoreRound']      = $quantity_score;
+	$_SESSION['Team1QuantityScoreTotalRound'] = $quantity_score+$bonus;
+
+	$_SESSION['Team1BonusTotal'] += $_SESSION['Team1BonusScoreRound'];
+	$_SESSION['Team1QuantityTotal'] += $_SESSION['Team1QuantityScoreRound'];
+	$_SESSION['Team1Total'] += $_SESSION['Team1QuantityScoreTotalRound'];
+	$_SESSION['RoundCompleate_team1'] = true;
+
+	require_once '../lib/rounds.php';
+	$_round  = new Rounds();
+	$fileds  = array(0=> 'quantity_round'.$_SESSION['Round']);
+	$values  = array(0=> $quantity_score_bonus);
+	$counter = count($values);
+	$select  = 'team';
+	$id      = $team;
+	$_round->update($fileds, $values, $counter, $select, $id);
+
+	header("Location: ../team1.php");
+}
+if (isset($_POST['add_bonus_team1'])) {
+	$bonus = $_POST['number'];
+	require_once '../lib/rounds.php';
+	$_round          = new Rounds();
+	$round           = $_round->get_by_where1('team', 'team1');
+	$currentRound    = 'quantity_round'.$_SESSION['Round'];
+	$last_quality    = $round[0][$currentRound];
+	$current_quality = $last_quality+$bonus;
+
+	$_SESSION['Team1QuantityScoreRound'] += $bonus;
+	$_SESSION['Team1QuantityTotal'] += $bonus;
+
+	$fileds  = array(0=> 'quantity_round'.$_SESSION['Round']);
+	$values  = array(0=> $current_quality);
+	$counter = count($values);
+	$select  = 'team';
+	$id      = 'team1';
+	$_round->update($fileds, $values, $counter, $select, $id);
+	header("Location: ../team1.php");
+}
+
+/////////////// Team 2 ///////////////////////////////////////////////
+
+if (isset($_POST['saveRoundTeam2'])) {
+	require_once '../lib/settings.php';
+	$_sett  = new Setting();
+	$params = $_sett->get_by_where1('type', 'taget_time');
+	//var_dump($params);
+
+	$taget_time           = $params[0][2];
+	$params               = $_sett->get_by_where1('type', 'taget_hold');
+	$taget_hold           = $params[0][2];
+	$params               = $_sett->get_by_where1('type', 'n_rounds');
+	$n_rounds             = $params[0][2];
+	echo $ath             = $_POST['ath'].'<br>';
+	echo $hold            = $_POST['hold'].'<br>';
+	echo $bonus           = $_POST['number'].'<br>';
+	$quantity_score       = 0;
+	$quantity_score_bonus = 0;
+	$team                 = "team2";
+
+	//time
+	if ($ath < $taget_time+1) {
+		$quantity_score += 100;
+	} elseif ($ath < (1.2*$taget_time)+1) {
+		$quantity_score += 50;
+	} elseif ($ath < (1.4*$taget_time)+1) {
+		$quantity_score += 25;
+	} elseif ($ath > (1.4*$taget_time)+1) {
+		$quantity_score += 0;
+	}
+
+	//hold
+	if ($hold < $taget_hold+1) {
+		$quantity_score += 100;
+	} elseif ($hold < (1.2*$taget_hold)+1) {
+		$quantity_score += 50;
+	} elseif ($hold < (1.4*$taget_hold)+1) {
+		$quantity_score += 25;
+	} elseif ($hold > (1.4*$taget_hold)+1) {
+		$quantity_score += 0;
+	}
+
+	$quantity_score_bonus                     = $quantity_score+$bonus;
+	$_SESSION['Team2BonusScoreRound']         = $bonus;
+	$_SESSION['Team2QuantityScoreRound']      = $quantity_score;
+	$_SESSION['Team2QuantityScoreTotalRound'] = $quantity_score+$bonus;
+
+	$_SESSION['Team2BonusTotal'] += $_SESSION['Team2BonusScoreRound'];
+	$_SESSION['Team2QuantityTotal'] += $_SESSION['Team2QuantityScoreRound'];
+	$_SESSION['Team2Total'] += $_SESSION['Team2QuantityScoreTotalRound'];
+	$_SESSION['RoundCompleate_team2'] = true;
+
+	require_once '../lib/rounds.php';
+	$_round  = new Rounds();
+	$fileds  = array(0=> 'quantity_round'.$_SESSION['Round']);
+	$values  = array(0=> $quantity_score_bonus);
+	$counter = count($values);
+	$select  = 'team';
+	$id      = $team;
+	$_round->update($fileds, $values, $counter, $select, $id);
+
+	header("Location: ../team2.php");
+}
+if (isset($_POST['add_bonus_team2'])) {
+	$bonus = $_POST['number'];
+	require_once '../lib/rounds.php';
+	$_round          = new Rounds();
+	$round           = $_round->get_by_where1('team', 'team2');
+	$currentRound    = 'quantity_round'.$_SESSION['Round'];
+	$last_quality    = $round[0][$currentRound];
+	$current_quality = $last_quality+$bonus;
+
+	$_SESSION['Team2QuantityScoreRound'] += $bonus;
+	$_SESSION['Team2QuantityTotal'] += $bonus;
+
+	$fileds  = array(0=> 'quantity_round'.$_SESSION['Round']);
+	$values  = array(0=> $current_quality);
+	$counter = count($values);
+	$select  = 'team';
+	$id      = 'team2';
+	$_round->update($fileds, $values, $counter, $select, $id);
+	header("Location: ../team2.php");
+}
+
+///////////////// Team 3 ///////////////////////////////////////
+if (isset($_POST['saveRoundTeam3'])) {
+	require_once '../lib/settings.php';
+	$_sett  = new Setting();
+	$params = $_sett->get_by_where1('type', 'taget_time');
+	//var_dump($params);
+
+	$taget_time           = $params[0][2];
+	$params               = $_sett->get_by_where1('type', 'taget_hold');
+	$taget_hold           = $params[0][2];
+	$params               = $_sett->get_by_where1('type', 'n_rounds');
+	$n_rounds             = $params[0][2];
+	echo $ath             = $_POST['ath'].'<br>';
+	echo $hold            = $_POST['hold'].'<br>';
+	echo $bonus           = $_POST['number'].'<br>';
+	$quantity_score       = 0;
+	$quantity_score_bonus = 0;
+	$team                 = "team3";
+
+	//time
+	if ($ath < $taget_time+1) {
+		$quantity_score += 100;
+	} elseif ($ath < (1.2*$taget_time)+1) {
+		$quantity_score += 50;
+	} elseif ($ath < (1.4*$taget_time)+1) {
+		$quantity_score += 25;
+	} elseif ($ath > (1.4*$taget_time)+1) {
+		$quantity_score += 0;
+	}
+
+	//hold
+	if ($hold < $taget_hold+1) {
+		$quantity_score += 100;
+	} elseif ($hold < (1.2*$taget_hold)+1) {
+		$quantity_score += 50;
+	} elseif ($hold < (1.4*$taget_hold)+1) {
+		$quantity_score += 25;
+	} elseif ($hold > (1.4*$taget_hold)+1) {
+		$quantity_score += 0;
+	}
+
+	$quantity_score_bonus                     = $quantity_score+$bonus;
+	$_SESSION['Team3BonusScoreRound']         = $bonus;
+	$_SESSION['Team3QuantityScoreRound']      = $quantity_score;
+	$_SESSION['Team3QuantityScoreTotalRound'] = $quantity_score+$bonus;
+
+	$_SESSION['Team3BonusTotal'] += $_SESSION['Team3BonusScoreRound'];
+	$_SESSION['Team3QuantityTotal'] += $_SESSION['Team3QuantityScoreRound'];
+	$_SESSION['Team3Total'] += $_SESSION['Team3QuantityScoreTotalRound'];
+	$_SESSION['RoundCompleate_team3'] = true;
+
+	require_once '../lib/rounds.php';
+	$_round  = new Rounds();
+	$fileds  = array(0=> 'quantity_round'.$_SESSION['Round']);
+	$values  = array(0=> $quantity_score_bonus);
+	$counter = count($values);
+	$select  = 'team';
+	$id      = $team;
+	$_round->update($fileds, $values, $counter, $select, $id);
+
+	header("Location: ../team3.php");
+}
+if (isset($_POST['add_bonus_team3'])) {
+	$bonus = $_POST['number'];
+	require_once '../lib/rounds.php';
+	$_round          = new Rounds();
+	$round           = $_round->get_by_where1('team', 'team3');
+	$currentRound    = 'quantity_round'.$_SESSION['Round'];
+	$last_quality    = $round[0][$currentRound];
+	$current_quality = $last_quality+$bonus;
+
+	$_SESSION['Team3QuantityScoreRound'] += $bonus;
+	$_SESSION['Team3QuantityTotal'] += $bonus;
+
+	$fileds  = array(0=> 'quantity_round'.$_SESSION['Round']);
+	$values  = array(0=> $current_quality);
+	$counter = count($values);
+	$select  = 'team';
+	$id      = 'team3';
+	$_round->update($fileds, $values, $counter, $select, $id);
+	header("Location: ../team3.php");
+}
+
+/////////////////// Team 4 //////////////////////////////////////////
+
+if (isset($_POST['saveRoundTeam4'])) {
+	require_once '../lib/settings.php';
+	$_sett  = new Setting();
+	$params = $_sett->get_by_where1('type', 'taget_time');
+	//var_dump($params);
+
+	$taget_time           = $params[0][2];
+	$params               = $_sett->get_by_where1('type', 'taget_hold');
+	$taget_hold           = $params[0][2];
+	$params               = $_sett->get_by_where1('type', 'n_rounds');
+	$n_rounds             = $params[0][2];
+	echo $ath             = $_POST['ath'].'<br>';
+	echo $hold            = $_POST['hold'].'<br>';
+	echo $bonus           = $_POST['number'].'<br>';
+	$quantity_score       = 0;
+	$quantity_score_bonus = 0;
+	$team                 = "team4";
+
+	//time
+	if ($ath < $taget_time+1) {
+		$quantity_score += 100;
+	} elseif ($ath < (1.2*$taget_time)+1) {
+		$quantity_score += 50;
+	} elseif ($ath < (1.4*$taget_time)+1) {
+		$quantity_score += 25;
+	} elseif ($ath > (1.4*$taget_time)+1) {
+		$quantity_score += 0;
+	}
+
+	//hold
+	if ($hold < $taget_hold+1) {
+		$quantity_score += 100;
+	} elseif ($hold < (1.2*$taget_hold)+1) {
+		$quantity_score += 50;
+	} elseif ($hold < (1.4*$taget_hold)+1) {
+		$quantity_score += 25;
+	} elseif ($hold > (1.4*$taget_hold)+1) {
+		$quantity_score += 0;
+	}
+
+	$quantity_score_bonus                     = $quantity_score+$bonus;
+	$_SESSION['Team4BonusScoreRound']         = $bonus;
+	$_SESSION['Team4QuantityScoreRound']      = $quantity_score;
+	$_SESSION['Team4QuantityScoreTotalRound'] = $quantity_score+$bonus;
+
+	$_SESSION['Team4BonusTotal'] += $_SESSION['Team4BonusScoreRound'];
+	$_SESSION['Team4QuantityTotal'] += $_SESSION['Team4QuantityScoreRound'];
+	$_SESSION['Team4Total'] += $_SESSION['Team4QuantityScoreTotalRound'];
+	$_SESSION['RoundCompleate_team4'] = true;
+
+	require_once '../lib/rounds.php';
+	$_round  = new Rounds();
+	$fileds  = array(0=> 'quantity_round'.$_SESSION['Round']);
+	$values  = array(0=> $quantity_score_bonus);
+	$counter = count($values);
+	$select  = 'team';
+	$id      = $team;
+	$_round->update($fileds, $values, $counter, $select, $id);
+
+	header("Location: ../team4.php");
+}
+if (isset($_POST['add_bonus_team4'])) {
+	$bonus = $_POST['number'];
+	require_once '../lib/rounds.php';
+	$_round          = new Rounds();
+	$round           = $_round->get_by_where1('team', 'team4');
+	$currentRound    = 'quantity_round'.$_SESSION['Round'];
+	$last_quality    = $round[0][$currentRound];
+	$current_quality = $last_quality+$bonus;
+
+	$_SESSION['Team4QuantityScoreRound'] += $bonus;
+	$_SESSION['Team4QuantityTotal'] += $bonus;
+
+	$fileds  = array(0=> 'quantity_round'.$_SESSION['Round']);
+	$values  = array(0=> $current_quality);
+	$counter = count($values);
+	$select  = 'team';
+	$id      = 'team4';
+	$_round->update($fileds, $values, $counter, $select, $id);
+	header("Location: ../team4.php");
+}
+
+?>
+
+<? ob_flush(); ?>
