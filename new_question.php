@@ -68,26 +68,7 @@ if (isset($_GET['catname'])) {
 			<div class="logo">
 				
 			</div>
-			<nav id="nav">
-				<ul>
-					<li >
-						<a href="index.php">
-							<i class="ti-home"></i>
-						</a>
-					</li>
-					<li>
-						<a href="start.php">
-							<i class="ti-alarm-clock"></i>
-						</a>
-					</li>
-					<li>
-						<a href="settings.php">
-							<i class="ti-ruler-pencil"></i>
-						</a>
-					</li>
-					
-				</ul>
-			</nav>
+			<?php require 'inc/menu.php' ?>
 			<div class="copyright">
 				<p>© 2017</p>
 			</div>
