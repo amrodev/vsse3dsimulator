@@ -94,27 +94,7 @@ setInterval(ajaxCall, (2 * 1000)); // x * 1000 to get it in seconds
                <a href="funcs/counter_functions2.php?reset=counters" id="button-start" style="color:white; font-size:18px;">
 		           Reset</a>
 			</div>
-			<nav id="nav">
-
-				<ul>
-					<li>
-						<a href="index.php" style="border-bottom: 0px;">
-							<i class="ti-home"></i>
-						</a>
-					</li>
-					<li>
-						<a href="start.php" style="border-bottom: 0px;">
-							<i class="ti-alarm-clock"></i>
-						</a>
-					</li>
-					<li>
-						<a href="settings.php" style="border-bottom: 0px;">
-							<i class="ti-ruler-pencil"></i>
-						</a>
-					</li>
-					
-				</ul>
-			</nav>
+			<?php require 'inc/menu.php' ?>
 			<div class="copyright">
 				<p>© 2017</p>
 			</div>

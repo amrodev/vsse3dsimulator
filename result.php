@@ -74,6 +74,7 @@ $Team4totalQuality  = $quality_team4[0][0];
 $Team4totalQuantity = $quantity_team4[0][0];
 $Team4totalBonus    = $bonus_team4[0][0];
 
+header("Refresh: 10; url=result.php");
 ?>
 
 
@@ -84,94 +85,6 @@ $Team4totalBonus    = $bonus_team4[0][0];
 <script src="js/timer.js"></script>
    <script src="js/timer_hold.js"></script>
   <title>Result</title>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>
-  
-  <script>
-    function CallAHTTeam1() {
-      $.ajax({
-         url: "result_aht_team1.html", 
-         success: (function (result) {
-             $("#divAHTTeam1").html(result);
-         })
-      })
-    };
-    function CallAHTTeam2() {
-      $.ajax({
-         url: "result_aht_team2.html", 
-         success: (function (result) {
-             $("#divAHTTeam2").html(result);
-         })
-      })
-    };
-    function CallAHTTeam3() {
-      $.ajax({
-         url: "result_aht_team3.html", 
-         success: (function (result) {
-             $("#divAHTTeam3").html(result);
-         })
-      })
-    };
-    function CallAHTTeam4() {
-      $.ajax({
-         url: "result_aht_team4.html", 
-         success: (function (result) {
-             $("#divAHTTeam4").html(result);
-         })
-      })
-    };
-
-    function CallHOLDTeam1() {
-      $.ajax({
-         url: "result_hold_team1.html", 
-         success: (function (result) {
-             $("#divHOLDTeam1").html(result);
-         })
-      })
-    };
-    function CallHOLDTeam2() {
-      $.ajax({
-         url: "result_hold_team2.html", 
-         success: (function (result) {
-             $("#divHOLDTeam2").html(result);
-         })
-      })
-    };
-    function CallHOLDTeam3() {
-      $.ajax({
-         url: "result_hold_team3.html", 
-         success: (function (result) {
-             $("#divHOLDTeam3").html(result);
-         })
-      })
-    };
-    function CallHOLDTeam4() {
-      $.ajax({
-         url: "result_hold_team4.html", 
-         success: (function (result) {
-             $("#divHOLDTeam4").html(result);
-         })
-      })
-    };
-    CallAHTTeam1(); 
-    setInterval(CallAHTTeam1, (1 * 1000));
-    CallAHTTeam2(); 
-    setInterval(CallAHTTeam2, (1 * 1000));
-    CallAHTTeam3(); 
-    setInterval(CallAHTTeam3, (1 * 1000));
-    CallAHTTeam4(); 
-    setInterval(CallAHTTeam4, (1 * 1000));
-
-    CallHOLDTeam1(); 
-    setInterval(CallHOLDTeam1, (1 * 1000));
-    CallHOLDTeam2(); 
-    setInterval(CallHOLDTeam2, (1 * 1000));
-    CallHOLDTeam3(); 
-    setInterval(CallHOLDTeam3, (1 * 1000));
-    CallHOLDTeam4(); 
-    setInterval(CallHOLDTeam4, (1 * 1000)); 
-</script>
-
-
 </head>
 <style>
   
@@ -284,7 +197,7 @@ if (!isset($_SESSION['OldRound'])) {
       >
         <div class="team1">
         <h2 style="padding-top:15px;">Team 1</h2>
-          <div style="position:AHAHative; padding-top:20px; font-size:25px; margin-top:-15px; background-color: #037fdb">
+          <div style="position:relative; padding-top:20px; font-size:25px; margin-top:-15px; background-color: #037fdb">
             <p style="margin-top: -2px; font-size: 14px; margin-left: -110px;">TOTAL</p>
             <p style="margin-top: -18px; font-weight: 700; font-size: 35px;"><?php echo $Team1totalQuality+$Team1totalQuantity+$Team1totalBonus; ?></p>
           </div>
@@ -313,12 +226,12 @@ if (!isset($_SESSION['OldRound'])) {
                
                <td style="color:white; background-color: #037fdb; border-radius: 6px;">AHT
                  <div style="margin-top:-25px; margin-bottom: -25px; width: 50px; color: white; ">            
-                  <p><div id="divAHTTeam1" ></div></p>
+                  <p><iframe width="40" height="40" border="0" src="result_aht_team1.html" scrolling="no" frameborder="0"></iframe></p>
                  </div>
                </td>
                <td style="color:white; background-color: #037fdb; border-radius: 6px;">HOLD
                  <div style="margin-top:-25px; margin-bottom: -25px; width: 50px; color: white; ">            
-                  <p><div id="divHOLDTeam1"></div></p>
+                  <p><iframe width="40" height="40" border="0" src="result_hold_team1.html" scrolling="no" frameborder="0"></iframe></p>
                  </div>
                </td>
 
@@ -394,12 +307,12 @@ if (!isset($_SESSION['OldRound'])) {
                
                <td style="color:white; background-color: #768615; border-radius: 6px;">AHT
                  <div style="margin-top:-25px; margin-bottom: -25px; width: 50px; color: white; ">            
-                  <p><div id="divAHTTeam2"></div></p>
+                  <p><iframe width="40" height="40" border="0" src="result_aht_team2.html" scrolling="no" frameborder="0"></iframe></p>
                  </div>
                </td>
                <td style="color:white; background-color: #768615; border-radius: 6px;">HOLD
                  <div style="margin-top:-25px; margin-bottom: -25px; width: 50px; color: white; ">            
-                  <p><div id="divHOLDTeam2"></div></p>
+                  <p><iframe width="40" height="40" border="0" src="result_hold_team2.html" scrolling="no" frameborder="0"></iframe></p>
                  </div>
                </td>
 
@@ -472,12 +385,12 @@ if (!isset($_SESSION['OldRound'])) {
                
                <td style="color:white; background-color: #7d106e; border-radius: 6px;">AHT
                  <div style="margin-top:-25px; margin-bottom: -25px; width: 50px; color: white; ">            
-                  <p><div id="divAHTTeam3"></div></p>
+                  <p><iframe width="40" height="40" border="0" src="result_aht_team3.html" scrolling="no" frameborder="0"></iframe></p>
                  </div>
                </td>
                <td style="color:white; background-color: #7d106e; border-radius: 6px;">HOLD
                  <div style="margin-top:-25px; margin-bottom: -25px; width: 50px; color: white; ">            
-                  <p><div id="divHOLDTeam3"></div></p>
+                  <p><iframe width="40" height="40" border="0" src="result_hold_team3.html" scrolling="no" frameborder="0"></iframe></p>
                  </div>
                </td>
 
@@ -552,12 +465,12 @@ if (!isset($_SESSION['OldRound'])) {
                
                <td style="color:white; background-color: #d07c0f; border-radius: 6px;">AHT
                  <div style="margin-top:-25px; margin-bottom: -25px; width: 50px; color: white; ">            
-                  <p><div id="divAHTTeam4"></div></p>
+                  <p><iframe width="40" height="40" border="0" src="result_aht_team4.html" scrolling="no" frameborder="0"></iframe></p>
                  </div>
                </td>
                <td style="color:white; background-color: #d07c0f; border-radius: 6px;">HOLD
                  <div style="margin-top:-25px; margin-bottom: -25px; width: 50px; color: white; ">            
-                  <p><div id="divHOLDTeam4"></div></p>
+                  <p><iframe width="40" height="40" border="0" src="result_hold_team4.html" scrolling="no" frameborder="0"></iframe></p>
                  </div>
                </td>
 
